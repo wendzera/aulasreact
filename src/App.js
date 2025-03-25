@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+    <NavBar/>
       <BrowserRouter>
         <div className="container">
           <Routes>
@@ -21,7 +21,7 @@ function App() {
         <p>
           Gerenciador de Tarefas e Relatórios para TO
         </p>
-       </header>
+      
     </div>
   );
 }
