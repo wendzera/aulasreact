@@ -13,6 +13,9 @@ const NavBar = () => {
           <NavLink to="/login">Logar</NavLink>
         </li>
         <li>
+          <NavLink to="/register">Cadastrar-se</NavLink>
+        </li>
+        <li>
           <NavLink to="/contact">Contato</NavLink>
         </li>
         <li>
