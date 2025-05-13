@@ -8,6 +8,7 @@ import Contact from "./screens/Contact";
 import About from "./screens/About";
 import NavBar from "./components/NavBar";
 import Cadastrar from './screens/Register';
+import CadastrarLoja from './screens/RegisterStore';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Cadastrar />} />
+             <Route path="/registerstore" element={<CadastrarLoja />} />
             <Route path="/contact" element={<Contact />} />
             <Route path='/about' element={<About />} />
           </Routes>

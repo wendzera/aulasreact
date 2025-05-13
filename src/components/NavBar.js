@@ -16,6 +16,9 @@ const NavBar = () => {
           <NavLink to="/register">Cadastrar-se</NavLink>
         </li>
         <li>
+          <NavLink to="/registerstore">Cadastrar Loja</NavLink>
+        </li>
+        <li>
           <NavLink to="/contact">Contato</NavLink>
         </li>
         <li>
