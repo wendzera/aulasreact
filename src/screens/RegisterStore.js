@@ -3,93 +3,164 @@ import styles from './RegisterStore.module.css';
 import { useAuthentication } from '../hooks/useAuthentication';
 
 const RegisterStore = () => {
-    const [storeName, setStoreName] = useState('');
-    const [storeEmail, setStoreEmail] = useState('');
-    const [storePassword, setStorePassword] = useState('');
-    const [storeConfirm, setStoreConfirm] = useState('');
-    const [error, setError] = useState('');
+     const [form, setForm] = useState({
+    nomeLoja: '',
+    endereco: '',
+    cidade: '',
+    uf: '',
+    telefone: '',
+    email: ''
+  });
 
-    const { createUser, error: authError, loading } = useAuthentication();
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const { registerStore, error: authError, loading } = useAuthentication();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
 
-        const store = {
-            displayName: storeName,
-            displayEmail: storeEmail,
-            displayPassword: storePassword
-        };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
 
-        if (storePassword !== storeConfirm) {
-            setError("As senhas precisam ser iguais!");
-            return;
-        }
+    // Validações básicas
+    if (form.uf.length !== 2) {
+      setError('UF deve ter 2 caracteres');
+      return;
+    }
 
-        await createUser(store);
-    };
+    if (form.telefone.length < 11) {
+      setError('Telefone inválido');
+      return;
+    }
 
-    useEffect(() => {
-        if (authError) {
-            setError(authError);
-        }
-    }, [authError]);
+    try {
+      await registerStore(form);
+      setSuccess(true);
+      // Limpa o formulário após o sucesso
+      setForm({
+        nomeLoja: '',
+        endereco: '',
+        cidade: '',
+        uf: '',
+        telefone: '',
+        email: ''
+      });
+    } catch (error) {
+      console.error('Erro no cadastro:', error);
+    }
+  };
 
-    return (
-        <div className={styles.register}>
-            <h2>Cadastro de Loja</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <span>Nome da Loja:</span>
-                    <input
-                        type="text"
-                        name="storeName"
-                        required
-                        placeholder="Nome da loja"
-                        value={storeName}
-                        onChange={(e) => setStoreName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <span>Email da Loja:</span>
-                    <input
-                        type="email"
-                        name="storeEmail"
-                        required
-                        placeholder="Email comercial"
-                        value={storeEmail}
-                        onChange={(e) => setStoreEmail(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <span>Senha:</span>
-                    <input
-                        type="password"
-                        name="storePassword"
-                        required
-                        placeholder="Senha"
-                        value={storePassword}
-                        onChange={(e) => setStorePassword(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <span>Confirmar Senha:</span>
-                    <input
-                        type="password"
-                        name="storeConfirm"
-                        required
-                        placeholder="Repetir senha"
-                        value={storeConfirm}
-                        onChange={(e) => setStoreConfirm(e.target.value)}
-                    />
-                </label>
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError]);
 
-                {!loading && <button className="btn">Cadastrar Loja</button>}
-                {loading && <button className="btn" disabled>Aguarde...</button>}
-                {error && <p className="error">{error}</p>}
-            </form>
+  return (
+    <div className={styles.container}>
+      <h2>Cadastro de Loja</h2>
+      {success && (
+        <div className={styles.success}>
+          Loja cadastrada com sucesso!
         </div>
-    );
+      )}
+      <form onSubmit={handleSubmit}>
+        <label>
+          <span>Nome da Loja:</span>
+          <input
+            type="text"
+            name="nomeLoja"
+            value={form.nomeLoja}
+            onChange={handleChange}
+            required
+            placeholder="Ex: Hamburgueria do Zé"
+          />
+        </label>
+
+        <label>
+          <span>Endereço:</span>
+          <input
+            type="text"
+            name="endereco"
+            value={form.endereco}
+            onChange={handleChange}
+            required
+            placeholder="Ex: Rua das Flores, 123"
+          />
+        </label>
+
+        <label>
+          <span>Cidade:</span>
+          <input
+            type="text"
+            name="cidade"
+            value={form.cidade}
+            onChange={handleChange}
+            required
+            placeholder="Ex: São Paulo"
+          />
+        </label>
+
+        <div className={styles.row}>
+          <label className={styles.half}>
+            <span>UF:</span>
+            <input
+              type="text"
+              name="uf"
+              value={form.uf}
+              onChange={handleChange}
+              required
+              maxLength={2}
+              placeholder="Ex: SP"
+            />
+          </label>
+
+          <label className={styles.half}>
+            <span>Telefone:</span>
+            <input
+              type="tel"
+              name="telefone"
+              value={form.telefone}
+              onChange={handleChange}
+              required
+              placeholder="Ex: (11) 99999-9999"
+            />
+          </label>
+        </div>
+
+        <label>
+          <span>E-mail:</span>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            placeholder="Ex: contato@loja.com"
+          />
+        </label>
+
+        {!loading && (
+          <button className={styles.btn} type="submit">
+            Cadastrar Loja
+          </button>
+        )}
+        {loading && (
+          <button className={styles.btn} disabled>
+            Aguarde...
+          </button>
+        )}
+
+        {error && <p className={styles.error}>{error}</p>}
+      </form>
+    </div>
+  );
 };
+
 
 export default RegisterStore;

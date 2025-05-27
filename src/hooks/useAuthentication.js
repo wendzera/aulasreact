@@ -27,7 +27,7 @@ export const useAuthentication = () => {
  
         try {
             const {user} = await createUserWithEmailAndPassword(
-                auth, data.email, data.password
+                auth, data.displayEmail, data.displayPassword
             )
  
             await updateProfile(user, {
@@ -47,7 +47,7 @@ export const useAuthentication = () => {
                 systemErrorMessage = "Ocorreu um erro - Tente Novamente";
             }
             setError(systemErrorMessage);
-        }
+        } finally{}
         setLoading(false);
     }
  
