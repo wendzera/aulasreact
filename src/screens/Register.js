@@ -33,7 +33,7 @@ const Register = () => {
  
        
      }, [authEror]);
-    return (
+return (
         <div>
             <h2>Cadastre-se para ter Acesso ao Site</h2>
             <form onSubmit={handleSubmit}>
@@ -41,42 +41,33 @@ const Register = () => {
                     <span>
                         Nome:
                     </span>
-                    <input type="text" name="setDisplayName" required placeholder="Nome do Usuário"
-                     value={displayName}
-                     onChange={(e) => setName(e.target.value)} />
+                    <input type="text" name="displayName" required placeholder="Nome do Usuário" value={displayName} onChange={(e) => setName(e.target.value)}/>
                 </label>
                 <label>
                     <span>
                         E-mail:
                     </span>
-                    <input type="email" name="displayEmail" required placeholder="E-mail"
-                     value={displayEmail}
-                     onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" name="displayEmail" required placeholder="E-mail" value={displayEmail} onChange={(e) => setEmail(e.target.value)}/>
                 </label>
                 <label>
                     <span>
                         Senha:
                     </span>
-                    <input type="password" name="displayPasword" required placeholder="Senha"
-                     value={displayPassword}
-                     onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" name="displayPassword" required placeholder="Senha" value={displayPassword} onChange={(e) => setPassword(e.target.value)}/>
                 </label>
                 <label>
                     <span>
                         Confirmar Senha:
                     </span>
-                    <input type="password" name="displayConfirm" required placeholder="Repetir Senha"
-                     value={displayConfirm}
-                     onChange={(e) => setConfirm(e.target.value)} />
+                    <input type="password" name="displayConfirm" required placeholder="Repetir Senha" value={displayConfirm} onChange={(e) => setConfirm(e.target.value)}/>
                 </label>
                 {!loading && <button className="btn">Cadastrar</button>}
-        {loading &&  <button className="btn" disabled>Aguarde...</button>}
-        {error && <p className="error">{error}</p>}
-       
+                {loading &&  <button className="btn" disabled>Aguarde...</button>}
                 {error && <p className="error">{error}</p>}
             </form>
         </div>
     )
 }
+ 
  
 export default Register
