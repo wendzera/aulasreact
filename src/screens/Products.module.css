@@ -1,0 +1,151 @@
+/* --- Contêiner Principal --- */
+.formWrapper {
+  max-width: 700px; /* Um pouco mais largo para os novos campos */
+  margin: 2rem auto; /* Mais espaço no topo e na base */
+  padding: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Títulos --- */
+h2, h3 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Formulário --- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Mais espaço entre os campos */
+}
+
+/* Estilo unificado para inputs e select */
+.form input,
+.form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Garante que padding não afete a largura total */
+}
+
+.form label {
+  font-weight: 600;
+  color: #555;
+}
+
+/* --- Botões --- */
+.btn {
+  padding: 12px 20px;
+  background-color: #007bff; /* Azul como cor principal */
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* --- Campo de Busca --- */
+.searchInput {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* --- Mensagem de Feedback --- */
+.message {
+  text-align: center;
+  padding: 10px;
+  margin: 1rem 0;
+  border-radius: 6px;
+  background-color: #e6ffed;
+  color: #2d6b3d;
+  border: 1px solid #b7e4c7;
+}
+
+/* --- Lista de Produtos --- */
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  gap: 1rem; /* Espaço entre as informações e os botões */
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+
+/* NOVO: Div para agrupar as informações do produto */
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* Pequeno espaço entre nome, marca e preço */
+}
+
+.productInfo strong {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.productInfo span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* NOVO: Div para agrupar os botões de ação */
+.productActions {
+  display: flex;
+  gap: 0.5rem; /* Espaço entre os botões editar/excluir */
+  flex-shrink: 0; /* Impede que os botões encolham */
+}
+
+/* Botões de Ação na Lista */
+.btnEdit, .btnDelete {
+  padding: 8px 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btnEdit {
+  background-color: #ffc107; /* Amarelo para editar */
+}
+
+.btnDelete {
+  background-color: #dc3545; /* Vermelho para excluir */
+}
+
+.btnEdit:hover, .btnDelete:hover {
+  opacity: 0.85;
+}
